@@ -1,0 +1,8 @@
+query1 : mahatmalink
+query2 : tomorrow
+query3 : MissUniverse
+query4 : SadhguruJV
+query5 : 2018-03-10
+query6 : India
+query7 : 2017-11-26
+query8 : 2018-03-08

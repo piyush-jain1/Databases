@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cassandra Query4</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/css/ext/bootstrap.min.css">
+  <script src="static/js/ext/jquery.min.js"></script>
+  <script src="static/js/ext/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  function cleared(){
+  	document.getElementById("query_form").reset();
+  	document.getElementById("output").innerHTML="";
+  }
+  </script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: black;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 10000000px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: black;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Cassandra Assignment, Piyush Jain, 150101046</a>
+
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-1 sidenav">
+      <p><a href="/q1">Query 1</a></p>
+      <p><a href="/q2">Query 2</a></p>
+      <p><a href="/q3">Query 3</a></p>
+      <p><a href="/q4">Query 4</a></p>
+      <p><a href="/q5">Query 5</a></p>
+      <p><a href="/q6">Query 6</a></p>
+      <p><a href="/q7">Query 7</a></p>
+      <p><a href="/q8">Query 8</a></p>
+    </div>
+    <div class="col-sm-11 text-left"> 
+      <h1>Query 4</h1>
+      <h3>4. Given an author name, retrieve all tweets that mentions the author. Sort them
+			in decreasing order of date and time.</h3>
+		<hr>
+		  
+	    <form method="post" id="query_form" action='/q4'>	
+	    	<div class="row">
+				<div class="col-xs-8">	
+					<div class="form-group">
+						<input class="form-control customInput" type="text" placeholder="Enter Author Name" name="author_name" required>
+					</div>
+				</div>
+				<div class="col-xs-2">
+				<button class="btn btn-success" id="submit">Submit</button>
+				</div>
+				<button class="btn btn-warning" onclick="cleared()">Clear</button>
+			</div>	
+		</form>
+    <!-- <p> Flag = {{ flag }} </p> -->
+    {% if flag == 1 %}
+		<div class="content table-responsive table-full-width" id="output">
+	      <table id="" class="table table-hover table-striped" border="10">
+	          <thead>
+	          <th>S.No.</th>
+	          <th>Tweet ID</th>
+	          <th>Tweet Text</th>
+	          <th>Author ID</th>
+	          <th>Location</th>
+	          <th>Language</th>
+	          <th>Datetime</th>
+	          </thead>
+	          <tbody>
+	            {% for row in result %}
+	              <tr>
+	            	{% for i in row %}
+	                  <td>{{ i }}</td>
+	            	{% endfor %}
+	              </tr>
+	            {% endfor %}
+	          </tbody>
+	      </table>
+	    </div>
+	{% endif %}
+    </div>
+
+    
+  </div>
+</div>
+
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+
+
+</body>
+</html>

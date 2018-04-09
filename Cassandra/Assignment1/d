@@ -1,0 +1,43 @@
+session.execute("""
+        CREATE TABLE tweet (
+            tid text,
+            quote_count bigint,
+            reply_count bigint,
+            hashtags list<text>,
+            datetime timestamp,
+            date date,
+            like_count bigint,
+            verified boolean,
+            sentiment int,
+            author text,
+            location text,
+            retweet_count bigint,
+            type text,
+            media_list list<text>,
+            quoted_source_id text,
+            url_list list<text>,
+            tweet_text text,
+            author_profile_image text,
+            author_screen_name text,
+            author_id text,
+            lang text,
+            keywords_processed_list list<text>,
+            retweet_source_id bigint,
+            mentions text,
+            replyto_source_id text,
+            PRIMARY KEY (tid)
+        )
+        """)
+
+session.execute("""
+        CREATE TABLE tweet_table2 (
+            tid text,
+            tweet_text text,
+            author_id text,
+            location text,
+            lang text,
+            like_count bigint,
+            keywords_processed_list list<text>,
+            PRIMARY KEY (author, datetime)
+        ) WITH CLUSTERING ORDER BY (datetime DESC)
+        """)
