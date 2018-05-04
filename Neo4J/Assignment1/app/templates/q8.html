@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block form %}
+    <div class="col-sm-11 text-left"> 
+      <h1>Query 8</h1>
+      <h2>Given a user, delete all tweets by that user</h2>
+      <hr>
+	    <form method="post" id="query_form" action='/q8'>	
+	    	<div class="row">
+				<div class="col-xs-8">	
+					<div class="form-group">
+						<input class="form-control customInput" type="text" placeholder="Enter Author Name" name="author_name" required>
+					</div>
+				</div>
+				<div class="col-xs-2">
+				<button class="btn btn-success" id="submit">Submit</button>
+				</div>
+				<button class="btn btn-warning" onclick="cleared()">Clear</button>
+			</div>	
+		</form>
+    <br>
+    {% if flag == 1 %}
+    <div class="content table-responsive table-full-width" id="output">
+        <h3>All tweets deleted for user : {{ author_name }}
+      </div>
+     {% endif %}
+   <br>
+{% endblock %}

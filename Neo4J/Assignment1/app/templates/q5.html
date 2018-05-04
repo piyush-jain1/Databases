@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block form %}
+    <div class="col-sm-11 text-left"> 
+      <h1>Query 5</h1>
+      <h2>Retrieve all the hashtags appearing from a given location.</h2>
+      <hr>
+	    <form method="post" id="query_form" action='/q5'>	
+	    	<div class="row">
+				<div class="col-xs-8">	
+					<div class="form-group">
+						<input class="form-control customInput" type="text" placeholder="Enter Location" name="location" required>
+					</div>
+				</div>
+				<div class="col-xs-2">
+				<button class="btn btn-success" id="submit">Submit</button>
+				</div>
+				<button class="btn btn-warning" onclick="cleared()">Clear</button>
+			</div>	
+		</form>
+    <br>
+    {% if flag == 1 %}
+    <div class="content table-responsive table-full-width" id="output">
+        <table id="" class="table table-hover table-striped" border="10">
+            <thead>
+            <th>Hashtags from {{ location }}</th>
+            </thead>
+            <tbody>
+              {% for res in result %}
+                <tr>
+                <td>{{ res }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        <h3>Number of rows = {{ count }}</h3>
+      </div>
+     {% endif %}
+   <br>
+{% endblock %}

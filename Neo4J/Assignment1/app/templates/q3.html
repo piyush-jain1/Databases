@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block form %}
+    <div class="col-sm-11 text-left"> 
+      <h1>Query 3</h1>
+      <h2>Retrieve the top 20 most frequently co-occurring hashtags. Two hashtags are
+said to be co-occurring if they co-appear in the same tweet</h2>
+      <hr>
+    <br>
+    {% if flag == 1 %}
+    <div class="content table-responsive table-full-width" id="output">
+        <table id="" class="table table-hover table-striped" border="10">
+            <thead>
+            <th>Co-occurring hashtags</th>
+            <th>Frequency</th>
+            </thead>
+            <tbody>
+              {% for res in result %}
+                <tr>
+                <td>{{ "(" + res[0][0] + " -- " + res[0][1] + ")" }}</td>
+                <td>{{ res[1] }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+     {% endif %}
+   <br>
+
+  {% endblock %}
+
+

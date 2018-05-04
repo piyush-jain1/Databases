@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ query_title }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="static/css/ext/bootstrap.min.css">
+  <script src="static/js/ext/jquery.min.js"></script>
+  <script src="static/js/ext/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+  function cleared1(){
+    document.getElementById("query_form1").reset();
+    document.getElementById("output1").innerHTML="";
+  }
+  function cleared2(){
+    document.getElementById("query_form2").reset();
+    document.getElementById("output2").innerHTML="";
+  }
+  
+  </script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: black;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 10000000px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: black;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Neo4j Lab Assignment, Piyush Jain, 150101046</a>
+
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">   
+  <div class="row content">
+    <!-- <div class="col-sm-1 sidenav">
+      <p><a href="/q1">Query 1</a></p>
+      <p><a href="/q2">Query 2</a></p>
+      <p><a href="/q3">Query 3</a></p>
+      <p><a href="/q4">Query 4</a></p>
+      <p><a href="/q5">Query 5</a></p>
+      <p><a href="/q6">Query 6</a></p>
+      <p><a href="/q7">Query 7</a></p>
+      <p><a href="/q8">Query 8</a></p>
+    </div> -->
+    <div class="col-sm-11 text-left"> 
+      <h1>Query 1 (Ques 6)</h1>
+      <h2>Given a user mention (author_screen_name), find the top two users (author_screen_names) who mentioned this user. Sort them in decresing order of mention count.</h2>
+      <hr>
+	    <form method="post" id="query_form1" action='/q1'>	
+	    	<div class="row">
+				<div class="col-xs-8">	
+					<div class="form-group">
+						<input class="form-control customInput" type="text" placeholder="Enter User Mention" name="mention" required>
+					</div>
+				</div>
+				<div class="col-xs-2">
+				<button class="btn btn-success" id="submit">Submit</button>
+				</div>
+				<button class="btn btn-warning" onclick="cleared1()">Clear</button>
+			</div>	
+		</form>
+    <br>
+    {% if flag == 1 %}
+    <div class="content table-responsive table-full-width" id="output1">
+        <table id="" class="table table-hover table-striped" border="10">
+            <thead>
+            <th>User Mention</th>
+            <th>User Mentioning User-mention</th>
+            <th>Tweet-ids of the tweets containing user-mention</th>
+            <th>Mention Count</th>
+            </thead>
+            <tbody>
+              {% for res in result %}
+                <tr>
+                <td>{{ mention }}
+                {% for r in res %}
+                    <td>{{ r }}</td>
+                {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+     {% endif %}
+     <br>
+     <h1>Query 2 (Ques 8)</h1>
+      <h2>Given a hashtag, retrieve top 3 users(author_screen_names) who have used the given hashtag in the tweets (tweet_type : Tweet) that they have posted. Sort them in decreasing order of frequencies.</h2>
+      <hr>
+    <form method="post" id="query_form2" action='/q2'> 
+        <div class="row">
+        <div class="col-xs-8">  
+          <div class="form-group">
+            <input class="form-control customInput" type="text" placeholder="Enter Hashtag" name="hashtag" required>
+          </div>
+        </div>
+        <div class="col-xs-2">
+        <button class="btn btn-success" id="submit">Submit</button>
+        </div>
+        <button class="btn btn-warning" onclick="cleared2()">Clear</button>
+      </div>  
+    </form>
+    <br>
+    {% if flag == 2 %}
+    <div class="content table-responsive table-full-width" id="output2">
+        <table id="" class="table table-hover table-striped" border="10">
+            <thead>
+            <th>Hashtag</th>
+            <th>User</th>
+            <th>Tweet-ids posted by the user containing this hashtag</th>
+            <th>Tweet Count</th>
+            </thead>
+            <tbody>
+              {% for res in result %}
+                <tr>
+                <td>{{ hashtag }}
+                {% for r in res %}
+                    <td>{{ r }}</td>
+                {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+     {% endif %}
+   <br>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Made by Piyush Jain</p>
+</footer>
+
+
+</body>
+</html>

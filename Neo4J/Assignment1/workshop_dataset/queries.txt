@@ -1,0 +1,33 @@
+1. MATCH (t:Tweet)<-[:TWEETED]-(a:Author)
+WHERE a.author_screen_name='MacsListJobs'
+RETURN t
+
+2. MATCH (a:Author)-[:TWEETED]->(t:Tweet)-[:MENTIONS]->(m:Mention)
+	WHERE a.author_screen_name='GajendraBhard11'
+	RETURN m
+
+3. MATCH (h1:Hashtag)<-[:CONTAINS_HASHTAG]-(t:Tweet)-[:CONTAINS_HASHTAG]->(h2:Hashtag)
+WHERE h1.value < h2.value
+RETURN h1.value,h2.value, COUNT([h1,h2])
+ORDER BY COUNT([h1,h2]) DESC LIMIT 20
+
+4. MATCH (m:Mention)<-[:MENTIONS]-(t:Tweet)-[:CONTAINS_HASHTAG]->(h:Hashtag)
+WHERE h.value="PA18"
+RETURN m.value,h.value, COUNT([m,h])
+ORDER BY COUNT([m,h]) DESC LIMIT 20
+
+5. MATCH (t:Tweet)-[:CONTAINS_HASHTAG]->(h:Hashtag)
+WHERE t.location="India"
+RETURN DISTINCT h.value
+
+6. MATCH (a:Author)-[:RETWEETED]->(r:Retweet)
+RETURN a.author_id,r.retweet_source_id, COUNT([a.author_id, r.retweet_source_id])
+ORDER BY COUNT([a.author_id, r.retweet_source_id]) DESC LIMIT 5
+
+7. MATCH (a:Author)-[:REPLIED_TO]->(r:Reply)
+RETURN a.author_id,r.user_id, COUNT([a.author_id, r.user_id])
+ORDER BY COUNT([a.author_id, r.user_id]) DESC LIMIT 5
+
+8. MATCH (t:Tweet)<-[:TWEETED]-(a:Author)
+WHERE a.author_screen_name='Nadeem53381398'
+DETACH DELETE t
